@@ -2,6 +2,16 @@
 #include <stdlib.h>
 #include <iostream>
 #include <ctime>
+
+//Macros
+#define sub_macro(x,y) (x - y)
+#define cube_macro(x) (x*x*x)
+#define min_macro(x,y) (x <= y ? x : y)
+#define odd_macro(a) (a % 2 == 0 ? 0 : 1)
+
+
+
+
 using namespace std;
 
 int EvensOrOdds(char *name); //forward declaration
@@ -9,10 +19,12 @@ int RockPaperScissors(char *name);
 int ThinkingOfANumber(char *aName);
 int DiceRollShowdown(char *name);
 void MiniGameController();
+void MacrosVsFunctions();
 char* GenRandomName();
 int RandomInRange(int min, int max);
 bool IsEven(int num);
 int RollDie(int sides);
+
 
 
 
@@ -38,6 +50,7 @@ int main(){
                     break;
                 case 2:
                     std::cout << "\n" << "Macros vs Functions selected" << "\n" << endl;
+                    MacrosVsFunctions();
                     break;
                 case 0:
                     std::cout << "Exit:" << endl;
@@ -477,6 +490,125 @@ void MiniGameController(){
 
 
 
+
+    return;
+}
+
+
+//Functions for Macros Vs Functions showdown
+
+
+int subf(int a, int b){
+    return a - b;
+}
+
+int cubef(int a){
+    return a * a * a;
+}
+
+int minf(int a, int b){
+    if(a <= b){
+        return a;
+    }
+    else{
+        return b;
+    }
+}
+
+
+int oddf(int a){
+    if(a % 2 == 0){
+        return 0;
+    }
+    else{
+        return 1;
+    }
+}
+
+
+
+void MacrosVsFunctions(){
+    int num1 = 10;
+    int num2 = 17;
+    int ans;
+
+    //Sub
+    ans = subf(num1, num2);
+    num1 = 10;
+    num2 = 17;
+    printf("subf(num1, num2) = %d\n",ans);
+
+    //ans = sub_macro(num1, num2);
+    printf("sub_macro(num1, num2) = %d\n", sub_macro(num1, num2));
+    num1 = 10;
+    num2 = 17;
+
+    ans = subf(num1++, num2--);
+    printf("subf(num1++, num2--) = %d\n", ans);
+    num1 = 10;
+    num2 = 17;
+
+    printf("sub_macro(num1++, num2--) = %d\n", sub_macro(num1++, num2--));
+    num1 = 10;
+    num2 = 17;
+
+    //Cube
+    ans = cubef(num1);
+    printf("cubef(num1) = %d\n", ans);
+    num1 = 10;
+    num2 = 17;
+
+    printf("cube_macro(num1) = %d\n", cube_macro(num1));
+    num1 = 10;
+    num2 = 17;
+
+    ans = cubef(--num1);
+    printf("cubef(--num1) = %d\n", ans);
+    num1 = 10;
+    num2 = 17;
+
+    printf("cube_macro(--num1) = %d\n", cube_macro(--num1));
+    num1 = 10;
+    num2 = 17;
+
+    
+    //Min
+    ans = minf(num1, num2);
+    printf("minf(num1, num2) = %d\n", ans);
+    num1 = 10;
+    num2 = 17;
+
+    printf("min_macro(num1, num2) = %d", min_macro(num1, num2));
+    num1 = 10;
+    num2 = 17;
+
+    ans = minf(--num1, --num2);
+    printf("minf(--num1, --num2) = %d\n", ans);
+    num1 = 10;
+    num2 = 17;
+
+    printf("min_macro(--num1, --num2) = %d\n", min_macro(--num1, --num2));
+    num1 = 10;
+    num2 = 17;
+
+    //Odd
+    ans = oddf(num1);
+    printf("oddf(num1) = %d", ans);
+    num1 = 10;
+    num2 = 17;
+
+    printf("odd_macro(num1) = %d\n", odd_macro(num1));
+    num1 = 10;
+    num2 = 17;
+
+    ans = oddf(num1++);
+    printf("oddf(num1++) = %d\n", ans);
+    num1 = 10;
+    num2 = 17;
+
+    printf("odd_macro(num1++) = %d\n\n" , odd_macro(num1++));
+    num1 = 10;
+    num2 = 17;
 
     return;
 }
