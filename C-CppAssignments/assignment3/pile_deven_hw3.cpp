@@ -4,13 +4,21 @@
 #include <ctime>
 
 void oneDMath();
+void OneDCharPrcss();
+
 int RandomInRange (int min, int max);
 float CalculateAvg(int* numbers, int size);
 void PrintIntArray(int* nums, int size);
 void ArraySort(int* arry, int size);
+void ArraySort(char* arry, int size);
 void swap(int *num1, int *num2);
+void swap(char *val1, char *val2);
 int FindMedian(int* array, int size);
 int NonUnique(int* array, int size);
+void PrintCharArray(char* chars, int size);
+int getLetterFreq(char* letters, int size, char val);
+void removeCharacter(char* letters, int size, char val);
+char GetRandomChar();
 
 
 
@@ -18,9 +26,12 @@ int NonUnique(int* array, int size);
 int main(){
 
     int menuNum = 0;
+    //int inputVal;
     srand(time(0));
 
     while(menuNum != 4){
+        int inputVal;
+        int temp;
         printf("Welcome to assignment 3!\n");
         printf("Menu:\n");
         printf("1 - 1D Math\n");
@@ -29,15 +40,24 @@ int main(){
         printf("4 - Exit\n");
         printf("Choose an option: ");
 
-        int inputVal = scanf("%d", &menuNum);
-        if(inputVal == 1){
-           switch(menuNum){
+        inputVal = scanf("%d", &temp);
+
+        if(inputVal != 1){
+            printf("Please enter 1, 2, 3, or 4\n\n");
+            //fflush(stdin);
+            int c;
+            while ((c = getchar()) != '\n' && c != EOF){ }
+        }
+        else{
+            menuNum = temp;
+            switch(menuNum){
                case 1:
                     std::cout << "1D Math\n" << std::endl;
                     oneDMath();
                     break;
                 case 2:
                     std::cout << "Single Dimention Character Processing\n" << std::endl;
+                    OneDCharPrcss();
                     break;
                 case 3:
                     std::cout << "Two-D Character Processing\n" << std::endl;
@@ -48,10 +68,6 @@ int main(){
                 default:
                     std::cout << "Please enter a single digit number\n" << std::endl;
            } 
-        }
-        else{
-            printf("Please enter 1, 2, 3, or 4\n\n");
-            fflush(stdin);
         }
         
 
@@ -79,7 +95,9 @@ void oneDMath(){
         if(inputVal == 1){
             if(arrySize <= 0){
                 printf("Please enter a size greater than 0: ");
-                fflush(stdin);
+                int c;
+                while ((c = getchar()) != '\n' && c != EOF){ }
+                //fflush(stdin);
             }
             else{
                 notValid = false;
@@ -87,7 +105,9 @@ void oneDMath(){
         }
         else{
             printf("Please enter an integer value: ");
-            fflush(stdin);
+            int c;
+            while ((c = getchar()) != '\n' && c != EOF){ }
+            //fflush(stdin);
         }
         
     }
@@ -102,7 +122,9 @@ void oneDMath(){
         }
         else{
             printf("Please enter an integer for min value: ");
-            fflush(stdin);
+            int c;
+            while ((c = getchar()) != '\n' && c != EOF){ }
+            //fflush(stdin);
         }
     }
 
@@ -122,7 +144,10 @@ void oneDMath(){
         }
         else{
             printf("Enter an integer: ");
-            fflush(stdin);
+            int c;
+            while ((c = getchar()) != '\n' && c != EOF){ }
+                
+            //fflush(stdin);
         }
     }
 
@@ -146,6 +171,98 @@ void oneDMath(){
 
     return;
 }
+
+
+
+
+void OneDCharPrcss(){
+    int size;
+    int c;
+    int menuOpt = 0;
+    int scanRtn;
+    char letter;
+    bool notValid = true;
+    printf("How many characters? ");
+
+    while(notValid){
+        scanRtn = scanf("%d", &size);
+        if(scanRtn != 1){
+            printf("Please enter a number:");
+            while ((c = getchar()) != '\n' && c != EOF){}
+        }
+        else{
+            notValid = false;
+        }
+
+    }
+
+    char* charArry = new char[size];
+
+    printf("\nFilling the array!\n");
+
+    for(int i = 0; i < size; i++){
+        charArry[i] = GetRandomChar();
+    }
+    
+    PrintCharArray(charArry, size);
+
+    while(menuOpt != 4){
+        printf("\nWhat would you like to do?\n");
+        printf("1.  Check frequency of a letter\n");
+        printf("2.  Remove a letter\n");
+        printf("3.  Sort\n");
+        printf("4.  Return to Main Menu\n");
+        printf("Choose an Option: ");
+        scanRtn = scanf("%d", &menuOpt);
+        if(scanRtn != 1){
+            printf("Please enter 1, 2, 3, or 4: ");
+            while ((c = getchar()) != '\n' && c != EOF){ }
+        }
+        else if(menuOpt == 1 ||  menuOpt == 2 || menuOpt == 3 || menuOpt == 4){
+            switch(menuOpt){
+                case 1:
+                    printf("What letter? ");
+                    while ((c = getchar()) != '\n' && c != EOF){ }
+                    scanf("%c", &letter);
+                    printf("\n");
+                    PrintCharArray(charArry, size);
+                    printf("There are %d of the letter %c", getLetterFreq(charArry, size, letter), letter);
+                    break;
+                case 2:
+                    printf("What letter? ");
+                    while ((c = getchar()) != '\n' && c != EOF){ }
+                    scanf("%c", &letter);
+                    printf("\n");
+                    //Remove funct goes here
+                    removeCharacter(charArry, size, letter);
+                    PrintCharArray(charArry, size);
+                    printf("%c was removed\n", letter);
+                    break;
+                case 3:
+                    printf("Sorting!\n");
+                    ArraySort(charArry, size);
+                    PrintCharArray(charArry, size);
+                    break;
+
+
+
+                    
+            }
+        }
+        else{
+            printf("Please enter a 1, 2, 3, or 4: ");
+            while ((c = getchar()) != '\n' && c != EOF){ }
+        }
+    }
+
+    
+
+
+
+    return;
+}
+
+
 
 
 
@@ -176,6 +293,14 @@ void PrintIntArray(int* nums, int size){
     return;
 }
 
+void PrintCharArray(char* chars, int size){
+    for(int i = 0; i < size; i++){
+        printf("%c", chars[i]);
+    }
+    printf("\n");
+    return;
+}
+
 
 void ArraySort(int* arry, int size){
     for(int i = 0; i < size - 1; i++){
@@ -185,8 +310,17 @@ void ArraySort(int* arry, int size){
             }
         }
     }
+    return;
+}
 
-
+void ArraySort(char* arry, int size){
+    for(int i = 0; i < size; i++){
+        for(int j = i + 1; j < size; j++){
+            if(arry[j] < arry[i]){
+                swap(&arry[i], &arry[j]);
+            }
+        }
+    }
 
     return;
 }
@@ -195,7 +329,14 @@ void swap(int *num1, int *num2){
     int temp = *num1;
     *num1 = *num2;
     *num2 = temp;
+    return;
+}
 
+void swap(char *val1, char *val2){
+    char temp = *val1;
+    *val1 = *val2;
+    *val2 = temp;
+    return;
 }
 
 int FindMedian(int* array, int size){
@@ -221,7 +362,35 @@ int NonUnique(int* array, int size){
     
 }
 
+char GetRandomChar(){
+    return 'a' + rand()%26;
+}
 
+
+int getLetterFreq(char* letters, int size, char val){
+    int freq = 0;
+    val = (char)tolower(val);
+
+    for(int i = 0; i < size; i++){
+        if(letters[i] == val){
+            freq++;
+        }
+    }
+    return freq;
+}
+
+
+void removeCharacter(char* letters, int size, char val){
+    int i = 0;
+    int j = 0;
+    for(i = 0; i < size; i++){
+        if(letters[i] != val){
+            letters[j] = letters[i];
+            j++;
+        }
+    }
+    letters[j] = '\0';
+}
 
 int RandomInRange (int min, int max){
     //Function Variables
