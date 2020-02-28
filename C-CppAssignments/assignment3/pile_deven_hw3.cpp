@@ -5,6 +5,7 @@
 
 void oneDMath();
 void OneDCharPrcss();
+void TwoDCharPrcss();
 
 int RandomInRange (int min, int max);
 float CalculateAvg(int* numbers, int size);
@@ -16,6 +17,7 @@ void swap(char *val1, char *val2);
 int FindMedian(int* array, int size);
 int NonUnique(int* array, int size);
 void PrintCharArray(char* chars, int size);
+void PrintCharArray(char** chars, int size, int charSize);
 int getLetterFreq(char* letters, int size, char val);
 void removeCharacter(char* letters, int size, char val);
 char GetRandomChar();
@@ -61,6 +63,7 @@ int main(){
                     break;
                 case 3:
                     std::cout << "Two-D Character Processing\n" << std::endl;
+                    TwoDCharPrcss();
                     break;
                 case 4:
                     std::cout << "Exit\n" << std::endl;
@@ -243,6 +246,9 @@ void OneDCharPrcss(){
                     ArraySort(charArry, size);
                     PrintCharArray(charArry, size);
                     break;
+                case 4:
+                    printf("Return to main\n\n");
+                    break;
 
 
 
@@ -254,7 +260,63 @@ void OneDCharPrcss(){
             while ((c = getchar()) != '\n' && c != EOF){ }
         }
     }
+    return;
+}
 
+
+
+void TwoDCharPrcss(){
+    int numStrings;
+    int maxStringSize;
+    bool notValid = true;
+    int c;
+    
+    printf("How many strings do want to enter? ");
+    while(notValid){
+        if(scanf("%d", &numStrings) != 1){
+            printf("Please enter an integer: ");
+            while ((c = getchar()) != '\n' && c != EOF){ }
+        }
+        else{
+            notValid = false;
+        }
+    }
+
+    notValid = true;
+    printf("What is the max size of the strings? ");
+    while(notValid){
+        if(scanf("%d", &maxStringSize) != 1){
+            printf("Please enter an integer: ");
+            while ((c = getchar()) != '\n' && c != EOF){ }
+        }
+        else{
+            notValid = false;
+        }
+    }
+    while ((c = getchar()) != '\n' && c != EOF){ }
+
+    notValid = true;
+
+    char** myStrings;
+    myStrings = new char*[numStrings];
+    for(int i = 0; i < numStrings; i++){
+        myStrings[i] = new char[maxStringSize];
+        std::cin >> myStrings[i];
+    }
+    
+    PrintCharArray(myStrings, numStrings, maxStringSize);
+
+    /*for(int i = 0; i < numStrings; i++){
+        for(int j = 0; j < maxStringSize; j++){
+            if(myStrings[i][j] != '\0' && myStrings[i][j] != 'P'){
+                printf("%c", myStrings[i][j]);
+                
+            }
+        }
+        printf("\n\n");
+    }
+    */
+    //PrintCharArray(myStrings, numStrings, maxStringSize);
     
 
 
@@ -299,6 +361,17 @@ void PrintCharArray(char* chars, int size){
     }
     printf("\n");
     return;
+}
+void PrintCharArray(char** chars, int size, int charSize){
+    for(int i = 0; i < size; i++){
+        for(int j = 0; j < charSize; j++){
+            if(chars[i][j] != '\0' && chars[i][j] != 'P'){
+                printf("%c", chars[i][j]);
+                
+            }
+        }
+        printf("\n\n");
+    }
 }
 
 
