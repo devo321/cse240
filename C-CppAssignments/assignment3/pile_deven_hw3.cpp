@@ -362,10 +362,11 @@ void PrintCharArray(char* chars, int size){
     printf("\n");
     return;
 }
+
 void PrintCharArray(char** chars, int size, int charSize){
     for(int i = 0; i < size; i++){
         for(int j = 0; j < charSize; j++){
-            if(chars[i][j] != '\0' && chars[i][j] != 'P'){
+            if(chars[i][j] != '\0'){ //&& chars[i][j] != 'P'){
                 printf("%c", chars[i][j]);
                 
             }
