@@ -5,8 +5,6 @@
 
 
 */
-
-
 #include <stdio.h> 
 #include <stdlib.h>
 #include <string.h>
@@ -202,37 +200,6 @@ int main(int argc, char* argv[]){
             std::cout << "Default condition met" << std::endl;
 
     }
-
-
-
-
-
-
-    //inFile = fopen("Iliad.txt", "r");
-    //outFile = fopen("encryptedFile.txt","w");
-
-
-    //encrypt
-    /*
-    while(fread(buffer,sizeof(buffer),1,inFile) > 0){
-        fwrite(encrypt(buffer, key, table), sizeof(buffer), 1, outFile);
-        //encrypt(buffer, key, table);
-    }
-    fclose(inFile);
-    fclose(outFile);
-    
-
-    inFile = fopen("encryptedFile.txt", "r");
-    outFile = fopen("decryptedFile.txt", "w");
-
-    while(fread(buffer, sizeof(buffer), 1, inFile) > 0){
-        fwrite(decrypt(buffer, key, table), sizeof(buffer), 1, outFile);
-    }
-    fclose(inFile);
-    fclose(outFile);
-    */
-
-
     for(int i = 0; i < 94; i++){
         delete[] table[i];
     }
