@@ -20,8 +20,8 @@
 
 */
 void printTable(char** table){
-    for(int i = 0; i < 95; i++){
-        for(int j = 0; j < 95; j++){
+    for(int i = 0; i < 94; i++){
+        for(int j = 0; j < 94; j++){
             printf("%c ", table[i][j]);
         }
         printf("\n");
@@ -36,8 +36,8 @@ void printTable(char** table){
 
 */
 char** generateTable(){
-    int startingChar = 32; //was 33
-    int arraySize = 95; // was 94
+    int startingChar = 33; //was 33
+    int arraySize = 94; // was 94
     int charLetter = startingChar;;
     int offset = 0;
 
@@ -89,9 +89,9 @@ char* encrypt(char* plainText, char* key, char** table){
     int b;
     int len = strlen(key);
     for(int i = 0; i < strlen(plainText); i++){
-        if((int)plainText[i]>= 32 && (int)plainText[i] <= 126){
-            a = (int)plainText[i]-32; //33
-            b = (int)key[i%len]-32; //33
+        if((int)plainText[i]>= 33 && (int)plainText[i] <= 126){
+            a = (int)plainText[i]-33; //33
+            b = (int)key[i%len]-33; //33
             cipher[i] = table[a][b];
         }
         else{
@@ -115,9 +115,9 @@ char* decrypt(char* cipher, char* key, char** table){
     static char decrypted[4096];
     int len = strlen(key);
     for(int i = 0; i < strlen(cipher); i++){
-        if((int)cipher[i] >= 32 && (int)cipher[i] <= 126){
+        if((int)cipher[i] >= 33 && (int)cipher[i] <= 126){
             bool flag = true;
-            int row = (int)key[i%len]-32;
+            int row = (int)key[i%len]-33;
             int col = 0;
             while(flag){
                 if((int)table[row][col] == (int)cipher[i]){

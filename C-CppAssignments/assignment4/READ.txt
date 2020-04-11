@@ -1,0 +1,1 @@
+Change table from char to int for full ascii test
